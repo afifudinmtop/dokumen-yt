@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Table</title>
+
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- datatables -->
+    <script type="text/javascript" src="./jquery-3.5.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="./datatables.min.css" />
+    <script type="text/javascript" src="./pdfmake.min.js"></script>
+    <script type="text/javascript" src="./vfs_fonts.js"></script>
+    <script type="text/javascript" src="./datatables.min.js"></script>
+
+    <style>
+      body {
+        background: #f8f8f8;
+      }
+      .button_export {
+        color: white !important;
+        border: 0 !important;
+        border-radius: 5px !important;
+      }
+
+      #tabel_area {
+        width: 75vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="tabel_area"
+      class="overflow-auto mx-auto bg-white p-3 rounded mt-4"
+    ></div>
+
+    <script>
+      const data = [
+        { id: 1, firstName: "John", lastName: "Doe", age: 32 },
+        { id: 2, firstName: "Jane", lastName: "Doe", age: 29 },
+        { id: 3, firstName: "Alice", lastName: "Johnson", age: 25 },
+        { id: 4, firstName: "Bob", lastName: "Smith", age: 40 },
+        { id: 5, firstName: "Charlie", lastName: "Brown", age: 22 },
+        { id: 6, firstName: "Debbie", lastName: "Miller", age: 34 },
+        { id: 7, firstName: "Edward", lastName: "Jones", age: 50 },
+        { id: 8, firstName: "Fiona", lastName: "White", age: 28 },
+        { id: 9, firstName: "George", lastName: "Harris", age: 45 },
+        { id: 10, firstName: "Hannah", lastName: "Thompson", age: 33 },
+        { id: 11, firstName: "Ian", lastName: "Taylor", age: 36 },
+        { id: 12, firstName: "Jenny", lastName: "Williams", age: 38 },
+        { id: 13, firstName: "Kyle", lastName: "Wilson", age: 31 },
+        { id: 14, firstName: "Laura", lastName: "Lee", age: 27 },
+        { id: 15, firstName: "Mike", lastName: "Davis", age: 44 },
+        { id: 16, firstName: "Nina", lastName: "Clark", age: 35 },
+        { id: 17, firstName: "Oscar", lastName: "Moore", age: 41 },
+        { id: 18, firstName: "Patricia", lastName: "Robinson", age: 29 },
+        { id: 19, firstName: "Quincy", lastName: "Hall", age: 42 },
+        { id: 20, firstName: "Rachel", lastName: "Lopez", age: 26 },
+        { id: 21, firstName: "Steve", lastName: "Martin", age: 39 },
+        { id: 22, firstName: "Tina", lastName: "Perez", age: 30 },
+        { id: 23, firstName: "Ulysses", lastName: "Garcia", age: 37 },
+        { id: 24, firstName: "Vera", lastName: "Martinez", age: 33 },
+        { id: 25, firstName: "Walter", lastName: "Lewis", age: 46 },
+      ];
+
+      draw_tabel(data);
+      function draw_tabel(data) {
+        let cetak = "";
+        cetak = `<table id="tabelx" class="table table-striped table-hover">`;
+        cetak += `<thead>`;
+        cetak += `<tr>`;
+        cetak += `<th>id</th>`;
+        cetak += `<th>firstName</th>`;
+        cetak += `<th>lastName</th>`;
+        cetak += `<th>age</th>`;
+        cetak += `</thead>`;
+
+        cetak += `<tbody>`;
+
+        // isi
+        data.forEach((x) => {
+          cetak += `<tr>`;
+          cetak += `<td class="td_id">${x.id}</td>`;
+          cetak += `<td class="td_firstName">${x.firstName}</td>`;
+          cetak += `<td class="td_lastName">${x.lastName}</td>`;
+          cetak += `<td class="td_age">${x.age}</td>`;
+          cetak += `</tr>`;
+        });
+
+        cetak += `</tbody>`;
+        cetak += `</table>`;
+
+        document.getElementById("tabel_area").innerHTML = cetak;
+        export_ready();
+      }
+
+      function export_ready() {
+        $(document).ready(function () {
+          $("#tabelx").DataTable({
+            lengthMenu: [
+              [10, 25, 50, -1],
+              [10, 25, 50, "All"],
+            ],
+            dom: "Bfrtip",
+            buttons: ["copy", "csv", "excel", "pdf", "print"],
+            order: [[0, "asc"]],
+            initComplete: function () {
+              // Access the tbody element and set the styles
+              $("#tabel tbody").css({
+                height: "50vh!important",
+                overflow: "auto",
+              });
+            },
+            columnDefs: [
+              { type: "num", targets: 0 }, //targets 0 means the first column
+              { type: "num", targets: 3 }, //targets 0 means the first column
+            ],
+          });
+        });
+
+        set_export_style();
+      }
+
+      // give css to buttons export
+      function set_export_style() {
+        setTimeout(() => {
+          // Helper function to apply the modifications to an element
+          function applyModifications(element, background, iconClass) {
+            element.style.background = background;
+
+            if (!element.classList.contains("button_export")) {
+              element.classList.add("button_export");
+              element.innerHTML = `<i class="${iconClass} pe-2"></i>${element.innerHTML}`;
+            }
+          }
+
+          // Select all elements with class "buttons-copy" and apply modifications
+          document.querySelectorAll(".buttons-copy").forEach((element) => {
+            applyModifications(element, "#0d6efd", "bi bi-back");
+          });
+
+          // Select all elements with class "buttons-csv" and apply modifications
+          document.querySelectorAll(".buttons-csv").forEach((element) => {
+            applyModifications(element, "#198754", "bi bi-filetype-csv");
+          });
+
+          // Select all elements with class "buttons-excel" and apply modifications
+          document.querySelectorAll(".buttons-excel").forEach((element) => {
+            applyModifications(
+              element,
+              "#198754",
+              "bi bi-file-earmark-excel-fill"
+            );
+          });
+
+          // Select all elements with class "buttons-pdf" and apply modifications
+          document.querySelectorAll(".buttons-pdf").forEach((element) => {
+            applyModifications(
+              element,
+              "#dc3545",
+              "bi bi-file-earmark-pdf-fill"
+            );
+          });
+
+          // Select all elements with class "buttons-print" and apply modifications
+          document.querySelectorAll(".buttons-print").forEach((element) => {
+            applyModifications(element, "#6c757d", "bi bi-printer-fill");
+          });
+        }, 500);
+      }
+    </script>
+  </body>
+</html>
