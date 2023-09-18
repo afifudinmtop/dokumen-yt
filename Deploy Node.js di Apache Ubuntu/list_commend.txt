@@ -1,0 +1,8 @@
+npm install -g pm2
+
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod proxy_balancer
+sudo a2enmod libmethod_byrequests
+
+pm2 start app.js --name "test"
