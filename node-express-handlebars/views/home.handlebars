@@ -1,0 +1,14 @@
+{{#if isAuthorized}}
+  <h1>Anda telah login</h1>
+{{else}}
+  <h1>Anda tidak terautentikasi</h1>
+{{/if}}
+
+<ul>
+  {{#each items}}
+    <li>{{this.name}}</li>
+  {{/each}}
+</ul>
+
+<!-- Contoh escaping -->
+{{{description}}}

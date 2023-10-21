@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pelajaran dari Contoh Handlebars</title>
+    <style>
+      ol > li {
+        padding-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Apa yang Kita Pelajari dari Contoh Handlebars</h1>
+    <ol>
+      <li>
+        <strong>Pengaturan Handlebars dengan Express:</strong>
+        <ul>
+          <li>
+            Integrasi Handlebars dengan aplikasi Express menggunakan
+            <code>express-handlebars</code>.
+          </li>
+          <li>
+            Pengaturan Handlebars sebagai mesin view dengan
+            <code>app.set('view engine', 'handlebars')</code>.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Penggunaan Layouts dan Views:</strong>
+        <ul>
+          <li>
+            Membuat layout dasar dengan Handlebars
+            (<code>main.handlebars</code>) yang digunakan sebagai kerangka untuk
+            halaman web.
+          </li>
+          <li>
+            Penyisipan konten dari view spesifik dengan
+            <code>{{{body}}}</code> dalam layout utama.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Penggunaan Partials:</strong>
+        <ul>
+          <li>
+            Membuat komponen yang dapat digunakan kembali dengan partials
+            (seperti <code>navbar.handlebars</code>).
+          </li>
+          <li>
+            Memungkinkan penggunaan ulang bagian kode di berbagai tempat dalam
+            aplikasi.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Penanganan Konteks dan Variabel:</strong>
+        <ul>
+          <li>
+            Mengirim data dari server ke template Handlebars melalui objek
+            konteks.
+          </li>
+          <li>Menampilkan variabel dengan sintaks <code>{{ }}</code>.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Kondisional dan Looping:</strong>
+        <ul>
+          <li>
+            Penggunaan blok <code>{{#if}}...{{/if}}</code> untuk konten
+            kondisional.
+          </li>
+          <li>
+            Penggunaan blok <code>{{#each}}...{{/each}}</code> untuk mengulang
+            melalui daftar item.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>HTML Escaping:</strong>
+        <ul>
+          <li>
+            Penanganan otomatis karakter escape oleh Handlebars untuk mencegah
+            serangan XSS.
+          </li>
+          <li>
+            Penyajian konten HTML mentah yang tidak di-escape menggunakan
+            <code>{{{ }}}</code>.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Ekspresi dan Properti:</strong>
+        <ul>
+          <li>
+            Menggunakan ekspresi untuk mengakses properti dari konteks yang
+            dikirim dari server.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Pengujian Aplikasi:</strong>
+        <ul>
+          <li>
+            Menjalankan server dengan Node.js dan melihat hasil di browser.
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </body>
+</html>
