@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>CSRF Demo with Handlebars</title>
+  </head>
+  <body>
+    <form action="/submit" method="post">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+      <!-- field form lainnya -->
+      <input type="text" name="username" placeholder="Username" />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
