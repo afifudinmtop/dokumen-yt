@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Simple File Upload with Progress Bar</title>
+  </head>
+  <body>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" name="file" id="file" />
+      <button type="button" onclick="uploadFile()">Upload</button>
+      <progress
+        id="progressBar"
+        value="0"
+        max="100"
+        style="width: 300px"
+      ></progress>
+    </form>
+
+    <script>
+      function uploadFile() {
+        var file = document.getElementById("file").files[0];
+        var formData = new FormData();
+        formData.append("file", file);
+        var xhr = new XMLHttpRequest();
+
+        xhr.upload.addEventListener(
+          "progress",
+          function (e) {
+            var percent = (e.loaded / e.total) * 100;
+            document.getElementById("progressBar").value = percent;
+          },
+          false
+        );
+
+        xhr.open("POST", "./upload.php");
+        xhr.send(formData);
+      }
+    </script>
+  </body>
+</html>

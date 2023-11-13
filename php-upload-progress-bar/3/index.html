@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Simple File Upload with Progress Bar</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .drop-zone {
+        border: 2px dashed #007bff;
+        border-radius: 5px;
+        text-align: center;
+        padding: 10px;
+        cursor: pointer;
+      }
+      .drop-zone:hover {
+        background-color: #f8f9fa;
+      }
+      #file-name {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <form id="uploadForm" enctype="multipart/form-data" class="mb-3">
+            <div class="drop-zone">
+              <span>Drag and drop a file here or click</span>
+              <input
+                type="file"
+                name="file"
+                id="file"
+                class="custom-file-input"
+                style="display: none"
+              />
+            </div>
+            <div id="file-name"></div>
+            <button
+              type="button"
+              class="btn btn-primary mt-3"
+              onclick="uploadFile()"
+            >
+              Upload
+            </button>
+          </form>
+          <progress
+            id="progressBar"
+            value="0"
+            max="100"
+            class="progress-bar"
+            style="width: 100%"
+          ></progress>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .querySelector(".drop-zone")
+        .addEventListener("click", function () {
+          document.getElementById("file").click();
+        });
+
+      document.getElementById("file").addEventListener("change", function () {
+        displayFileName(this.files[0]);
+      });
+
+      document
+        .querySelector(".drop-zone")
+        .addEventListener("dragover", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.style.backgroundColor = "#e2e6ea";
+        });
+
+      document
+        .querySelector(".drop-zone")
+        .addEventListener("dragleave", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.style.backgroundColor = "";
+        });
+
+      document
+        .querySelector(".drop-zone")
+        .addEventListener("drop", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.style.backgroundColor = "";
+          let files = e.dataTransfer.files;
+          document.getElementById("file").files = files;
+          displayFileName(files[0]);
+        });
+
+      function displayFileName(file) {
+        document.getElementById(
+          "file-name"
+        ).textContent = `Selected file: ${file.name}`;
+      }
+
+      function uploadFile() {
+        var file = document.getElementById("file").files[0];
+        var formData = new FormData();
+        formData.append("file", file);
+        var xhr = new XMLHttpRequest();
+
+        xhr.upload.addEventListener(
+          "progress",
+          function (e) {
+            var percent = (e.loaded / e.total) * 100;
+            document.getElementById("progressBar").value = percent;
+          },
+          false
+        );
+
+        xhr.open("POST", "./upload.php");
+        xhr.send(formData);
+      }
+    </script>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Simple File Upload with Progress Bar</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <form id="uploadForm" enctype="multipart/form-data" class="mb-3">
+            <div class="custom-file">
+              <input
+                type="file"
+                name="file"
+                id="file"
+                class="custom-file-input"
+              />
+              <label class="custom-file-label" for="file">Choose file</label>
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary mt-3"
+              onclick="uploadFile()"
+            >
+              Upload
+            </button>
+          </form>
+          <progress
+            id="progressBar"
+            value="0"
+            max="100"
+            class="progress-bar"
+            style="width: 100%"
+          ></progress>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function uploadFile() {
+        var file = document.getElementById("file").files[0];
+        var formData = new FormData();
+        formData.append("file", file);
+        var xhr = new XMLHttpRequest();
+
+        xhr.upload.addEventListener(
+          "progress",
+          function (e) {
+            var percent = (e.loaded / e.total) * 100;
+            document.getElementById("progressBar").value = percent;
+          },
+          false
+        );
+
+        xhr.open("POST", "./upload.php");
+        xhr.send(formData);
+      }
+    </script>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
