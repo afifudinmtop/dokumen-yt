@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Map Info on Click</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+      #mapid {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mapid"></div>
+
+    <script>
+      var mymap = L.map("mapid").setView([51.505, -0.09], 13);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap contributors",
+      }).addTo(mymap);
+
+      // Contoh data lokasi
+      var locations = [
+        { latLng: [51.5, -0.09], info: "Toko Buku ABC" },
+        { latLng: [51.505, -0.08], info: "Restoran XYZ" },
+        // Tambahkan lebih banyak lokasi sesuai kebutuhan
+      ];
+
+      locations.forEach(function (location) {
+        L.marker(location.latLng).addTo(mymap).bindPopup(location.info);
+      });
+
+      function onMapClick(e) {
+        // Mungkin menambahkan logika untuk menampilkan data dari API
+        alert("Koordinat: " + e.latlng.toString());
+      }
+
+      mymap.on("click", onMapClick);
+    </script>
+  </body>
+</html>

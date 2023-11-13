@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation Map</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+      #mapid {
+        height: 400px;
+        width: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mapid"></div>
+
+    <script>
+      var mymap = L.map("mapid");
+
+      function onLocationFound(e) {
+        var radius = e.accuracy / 2;
+
+        L.marker(e.latlng)
+          .addTo(mymap)
+          .bindPopup("You are within " + radius + " meters from this point")
+          .openPopup();
+
+        L.circle(e.latlng, radius).addTo(mymap);
+      }
+
+      function onLocationError(e) {
+        alert(e.message);
+      }
+
+      mymap.on("locationfound", onLocationFound);
+      mymap.on("locationerror", onLocationError);
+
+      mymap.locate({ setView: true, maxZoom: 16 });
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap contributors",
+      }).addTo(mymap);
+    </script>
+  </body>
+</html>
