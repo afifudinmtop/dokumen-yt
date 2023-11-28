@@ -1,0 +1,15 @@
+{
+  "name": "docker-nodejs",
+  "version": "1.0.0",
+  "description": "tes simple nodejs docker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Afifudin Maarif",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

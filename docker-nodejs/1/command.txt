@@ -1,0 +1,40 @@
+cd /your-dir/
+
+// build with customname
+docker build -t tes1:1 .
+
+// list of images
+docker images
+
+// delete image
+docker rmi tes1:1
+
+// run 
+docker run -p 3003:3000 -d --name tes1_1 tes1:1
+
+// list container
+docker ps -a
+
+// list container running
+docker ps
+
+// stop container
+docker stop tes1_1
+
+// re-start container
+docker start tes1_1
+
+// remove container
+docker rm tes1_1
+
+// read logs container
+docker logs tes1_1
+
+// read logs container live
+docker logs -f tes1_1
+
+// export image
+docker save -o tes1_1.tar tes1:1
+
+// import image
+docker load -i tes1_1.tar
