@@ -1,0 +1,50 @@
+<div class="row px-3 gap-3">
+  <form
+    action="/databases/edit"
+    method="post"
+    enctype="application/x-www-form-urlencoded"
+  >
+
+    {{! uuid }}
+    <input
+      type="text"
+      class="form-control d-none"
+      name="uuid"
+      value="{{uuid}}"
+    />
+
+    {{! judul }}
+    <div class="mb-3">
+      <label for="judul" class="form-label">Judul</label>
+      <input
+        type="text"
+        class="form-control"
+        id="judul"
+        name="judul"
+        placeholder="judul"
+        value="{{judul}}"
+      />
+    </div>
+
+    {{! isi }}
+    <div class="mb-3">
+      <label for="isi" class="form-label">Isi</label>
+      <textarea
+        class="form-control"
+        id="isi"
+        name="isi"
+        rows="3"
+      >{{isi}}</textarea>
+    </div>
+
+    <div class="d-flex gap-3">
+      {{! submit }}
+      <button type="submit" class="btn btn-primary">Simpan</button>
+
+      {{! hapus }}
+      <a href="/databases/hapus/{{uuid}}">
+        <button type="button" class="btn btn-danger">Hapus</button>
+      </a>
+    </div>
+  </form>
+</div>

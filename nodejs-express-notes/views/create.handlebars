@@ -1,0 +1,28 @@
+<div class="row px-3 gap-3">
+  <form
+    action="/databases/add"
+    method="post"
+    enctype="application/x-www-form-urlencoded"
+  >
+    {{! judul }}
+    <div class="mb-3">
+      <label for="judul" class="form-label">Judul</label>
+      <input
+        type="text"
+        class="form-control"
+        id="judul"
+        name="judul"
+        placeholder="judul"
+      />
+    </div>
+
+    {{! isi }}
+    <div class="mb-3">
+      <label for="isi" class="form-label">Isi</label>
+      <textarea class="form-control" id="isi" name="isi" rows="3"></textarea>
+    </div>
+
+    {{! submit }}
+    <button type="submit" class="btn btn-primary">Tambahkan</button>
+  </form>
+</div>

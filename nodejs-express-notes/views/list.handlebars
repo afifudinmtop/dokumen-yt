@@ -1,0 +1,12 @@
+<div class="row px-3 gap-3">
+  {{#each notes}}
+    <a href="/notes/edit/{{this.uuid}}" class="col-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{this.judul}}</h5>
+          {{this.isi}}
+        </div>
+      </div>
+    </a>
+  {{/each}}
+</div>

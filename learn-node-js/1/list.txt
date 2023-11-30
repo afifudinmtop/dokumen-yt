@@ -1,0 +1,8 @@
+express, 
+modul,
+middleware, 
+GET and POST request, 
+routes, 
+path, 
+serving html pages, 
+serving static files
