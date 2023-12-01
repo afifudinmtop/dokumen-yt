@@ -1,0 +1,53 @@
+sudo apt-get update
+sudo apt install php libapache2-mod-php php-mysql mysql-server
+sudo systemctl restart apache2
+
+// setup phpmyadmin
+sudo apt install phpmyadmin
+sudo mysql -u root
+ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY 'cobacoba';
+FLUSH PRIVILEGES;
+exit;
+
+// setup ftp
+sudo apt install vsftpd
+sudo nano /etc/vsftpd.conf
+sudo systemctl restart vsftpd
+sudo ufw allow 20/tcp
+sudo ufw allow 21/tcp
+sudo adduser user1
+
+// install composer
+sudo apt install curl unzip
+sudo apt install php php-curl
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+composer -v
+
+// directory setting
+sudo chmod -R 777 /var/www/
+cd /var/www/tes.apip.dev/public_html/
+sudo apt-get install unrar
+unrar x laravel-10.34.2.rar
+sudo chmod -R 777 /var/www/tes.apip.dev/public_html/
+sudo chown -Rf www-data:www-data /var/www/tes.apip.dev/public_html/
+
+// cara upgrade php 8.1 ke 8.2
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install php8.2
+sudo apt-get install php8.2-xml php8.2-gd php8.2-cli php8.2-curl php8.2-mbstring
+sudo a2dismod php8.1
+sudo a2enmod php8.2
+sudo service apache2 restart
+
+// pointing domain
+sudo chmod -R 777 /etc/apache2/sites-available/
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+sudo a2ensite tes.apip.dev.conf
+sudo systemctl reload apache2
+sudo snap install core; sudo snap refresh core
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --apache
