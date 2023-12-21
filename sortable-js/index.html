@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Belajar Sortable SJ</title>
+
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- sortable library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.1/Sortable.min.js"></script>
+  </head>
+  <body>
+    <div class="container mx-auto mt-5">
+      <div class="h1 text-center mb-3">Sortable JS</div>
+      <div id="list" class="d-grid gap-3 w-25 mx-auto">
+        <button type="button" class="btn btn-primary">elemen 1</button>
+        <button type="button" class="btn btn-success">elemen 2</button>
+        <button type="button" class="btn btn-danger">elemen 3</button>
+        <button type="button" class="btn btn-warning">elemen 4</button>
+      </div>
+    </div>
+
+    <script>
+      Sortable.create(list, {
+        animation: 150,
+      });
+    </script>
+  </body>
+</html>
