@@ -1,0 +1,55 @@
+# Node.js
+node_modules
+npm-debug.log
+npm-error.log
+yarn-error.log
+yarn-debug.log
+
+# Environment files
+.env
+.env.*.local
+
+# Logs
+logs
+*.log
+*.out
+
+# Directory for editor configurations
+.editorconfig
+.idea
+.vscode
+*.sublime-workspace
+
+# Dependency directories
+jspm_packages
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Debug log from yarn
+yarn-debug.log
+
+# project's git directory
+.git
+.gitignore
+
+# MacOS folder attributes
+.DS_Store
+
+# Thumbnails
+Thumbs.db
+
+# Files that might appear in the root of a volume
+.dockerenv

@@ -1,0 +1,45 @@
+sudo apt-get update
+sudo apt-get install apache2 vsftpd
+sudo nano /etc/vsftpd.conf
+
+sudo systemctl restart apache2
+sudo systemctl restart vsftpd
+
+sudo adduser admin1
+
+sudo mkdir /home/tes/
+sudo chmod -R 777 /home/tes/
+cd /home/tes/
+
+sudo snap install docker
+
+sudo docker-compose up -d
+sudo docker-compose down
+
+================================
+
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo systemctl restart apache2
+
+sudo nano /etc/apache2/sites-available/tes.apip.dev.conf
+
+<VirtualHost *:80>
+    ServerName tes.apip.dev
+    ServerAlias www.tes.apip.dev
+
+    ProxyPass / http://localhost:8850/
+    ProxyPassReverse / http://localhost:8850/
+
+    ErrorLog ${APACHE_LOG_DIR}/tes.com_error.log
+    CustomLog ${APACHE_LOG_DIR}/tes.com_access.log combined
+</VirtualHost>
+
+sudo a2ensite tes.apip.dev.conf
+sudo systemctl reload apache2
+
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --apache
+
+================================

@@ -1,0 +1,31 @@
+version: "3"
+services:
+  nodeapp:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "8850:3000"
+    command: sh -c "npm install && npm run start"
+
+  mysql:
+    image: mysql:8.2.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: adminpass
+      MYSQL_DATABASE: tes
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8851:80
+    environment:
+      PMA_HOST: mysql
+
+volumes:
+  mysql_data:
