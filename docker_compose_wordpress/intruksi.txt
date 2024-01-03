@@ -1,0 +1,64 @@
+sudo apt-get update
+
+sudo mkdir /home/tes/
+sudo chmod -R 777 /home/tes/
+cd /home/tes/
+
+sudo snap install docker
+sudo nano docker-compose.yml
+
+sudo docker-compose up -d
+sudo docker-compose down
+
+==============================
+
+sudo apt-get install apache2 
+sudo systemctl restart apache2
+
+================================
+
+sudo a2enmod proxy
+sudo a2enmod rewrite
+sudo a2enmod proxy_http
+sudo systemctl restart apache2
+
+sudo nano /etc/apache2/sites-available/tes2.apip.dev.conf
+
+<VirtualHost *:80>
+    ServerName tes2.apip.dev
+    ServerAlias www.tes2.apip.dev
+
+    ProxyPreserveHost On
+    ProxyPass / http://localhost:8850/
+    ProxyPassReverse / http://localhost:8850/
+
+    ErrorLog ${APACHE_LOG_DIR}/tes.com_error.log
+    CustomLog ${APACHE_LOG_DIR}/tes.com_access.log combined
+</VirtualHost>
+
+sudo a2ensite tes2.apip.dev.conf
+sudo systemctl reload apache2
+
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --apache
+
+================================
+
+fix bug SSL
+
+sudo nano /etc/apache2/sites-available/tes2.apip.dev.conf
+buat jadi
+sudo systemctl restart apache2
+
+wp-config.php
+
+//Begin Really Simple SSL session cookie settings
+@ini_set('session.cookie_httponly', true);
+@ini_set('session.cookie_secure', true);
+@ini_set('session.use_only_cookies', true);
+//END Really Simple SSL cookie settings
+
+//Begin Really Simple SSL Server variable fix
+   $_SERVER["HTTPS"] = "on";
+//END Really Simple SSL
