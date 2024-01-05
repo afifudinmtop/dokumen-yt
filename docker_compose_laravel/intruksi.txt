@@ -1,0 +1,57 @@
+sudo apt-get update
+
+sudo mkdir /home/tes/
+sudo chmod -R 777 /home/tes/
+cd /home/tes/
+
+sudo snap install docker
+sudo nano docker-compose.yml
+
+sudo docker-compose up -d
+sudo docker ps -a
+sudo docker start tes-laravel-1
+
+sudo docker exec tes-laravel-1 php artisan list
+sudo docker exec tes-laravel-1 php artisan route:list
+
+==============================
+
+sudo apt-get install apache2 vsftpd
+sudo nano /etc/vsftpd.conf
+
+sudo systemctl restart apache2
+sudo systemctl restart vsftpd
+
+sudo adduser admin1
+sudo chmod -R 777 /home/tes/
+
+================================
+
+sudo a2enmod proxy
+sudo a2enmod rewrite
+sudo a2enmod proxy_http
+sudo systemctl restart apache2
+
+sudo nano /etc/apache2/sites-available/tes3.apip.dev.conf
+
+<VirtualHost *:80>
+    ServerName tes3.apip.dev
+    ServerAlias www.tes3.apip.dev
+
+    ProxyPreserveHost On
+    ProxyPass / http://localhost:8850/
+    ProxyPassReverse / http://localhost:8850/
+
+    ErrorLog ${APACHE_LOG_DIR}/tes.com_error.log
+    CustomLog ${APACHE_LOG_DIR}/tes.com_access.log combined
+</VirtualHost>
+
+sudo a2ensite tes3.apip.dev.conf
+sudo systemctl reload apache2
+
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --apache
+
+================================
+
