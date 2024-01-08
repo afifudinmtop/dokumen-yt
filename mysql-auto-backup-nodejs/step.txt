@@ -1,0 +1,9 @@
+npm install mysqldump node-cron
+
+npm install pm2 -g
+pm2 start app.js
+pm2 list
+
+$ pm2 stop     <app_name|namespace|id|'all'|json_conf>
+$ pm2 restart  <app_name|namespace|id|'all'|json_conf>
+$ pm2 delete   <app_name|namespace|id|'all'|json_conf>
