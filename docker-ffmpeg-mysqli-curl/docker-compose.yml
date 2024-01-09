@@ -1,0 +1,14 @@
+version: "3.1"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php_apache
+    restart: always
+    volumes:
+      - /home/tes:/var/www/html
+      - ./custom-php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - "8850:80"
