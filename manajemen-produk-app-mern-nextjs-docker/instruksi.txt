@@ -1,0 +1,100 @@
+# vps ubuntu 22
+
+//////////////////////////////////////////////////////////////////
+# install depedency server util
+//////////////////////////////////////////////////////////////////
+sudo apt-get update
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+sudo apt-get install apache2 vsftpd unrar
+sudo nano /etc/vsftpd.conf
+
+
+
+//////////////////////////////////////////////////////////////////
+# Uncomment this to enable any form of FTP write command.
+//////////////////////////////////////////////////////////////////
+write_enable=YES
+
+sudo systemctl restart apache2
+sudo systemctl restart vsftpd
+
+
+
+//////////////////////////////////////////////////////////////////
+# for ftp
+//////////////////////////////////////////////////////////////////
+sudo mkdir /home/tes/
+sudo chmod -R 777 /home/tes/
+cd /home/tes/
+sudo adduser admin1
+
+
+
+//////////////////////////////////////////////////////////////////
+# upload data 
+//////////////////////////////////////////////////////////////////
+sudo unrar x app.rar
+sudo chmod -R 777 /home/tes/
+
+
+
+//////////////////////////
+# install docker
+//////////////////////////
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo systemctl start docker
+sudo apt-get install docker-compose
+
+
+
+//////////////////////////
+# build docker
+//////////////////////////
+sudo docker-compose up -d
+
+
+
+//////////////////////////////////////////////////////////////////
+# pointing domain
+//////////////////////////////////////////////////////////////////
+sudo a2enmod rewrite
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo systemctl restart apache2
+
+sudo nano /etc/apache2/sites-available/tes3.apip.dev.conf
+
+<VirtualHost *:80>
+    ServerName tes3.apip.dev
+    ServerAlias www.tes3.apip.dev
+
+    ProxyPass / http://localhost:8850/
+    ProxyPassReverse / http://localhost:8850/
+
+    ErrorLog ${APACHE_LOG_DIR}/tes.com_error.log
+    CustomLog ${APACHE_LOG_DIR}/tes.com_access.log combined
+</VirtualHost>
+
+sudo a2ensite tes3.apip.dev.conf
+sudo systemctl reload apache2
+
+
+
+//////////////////////////////////////////////////////////////////
+# ssl
+//////////////////////////////////////////////////////////////////
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --apache
+
+
+
+//////////////////////////
+# other command docker related
+//////////////////////////
+sudo docker ps -a
+sudo docker-compose down
+sudo docker-compose build
+sudo docker-compose up -d
+sudo docker exec -it php_apache /bin/bash
