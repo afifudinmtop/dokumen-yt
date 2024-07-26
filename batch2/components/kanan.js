@@ -1,5 +1,6 @@
 "use client";
 
+import Button_login from "./kanan/button_login";
 import Input_email from "./kanan/input_email";
 import Input_password from "./kanan/input_password";
 
@@ -15,6 +16,7 @@ export default function Kanan() {
         <Input_password />
 
         {/* button login */}
+        <Button_login />
 
         {/* forgotten password */}
 
