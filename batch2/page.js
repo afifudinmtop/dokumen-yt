@@ -1,5 +1,6 @@
 "use client";
 
+import Kanan from "./components/kanan";
 import Kiri from "./components/kiri";
 import Kiri_logo from "./components/kiri/logo";
 
@@ -10,7 +11,7 @@ export default function Page() {
       <Kiri />
 
       {/* kanan */}
-      <div className="bg-red-700"></div>
+      <Kanan />
     </div>
   );
 }
